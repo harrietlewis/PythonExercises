@@ -6,7 +6,15 @@ Write a function(s) that converts an octal number, represented as a string into 
 '''
 
 def octalToDecimal(oct):
-  return 42
+  # Powers of 8 from right to left
+  oct = str(oct)
+  decimal = 0
+  power = 0
+  for digit in reversed(oct):
+    decimal += int(digit) * (8**power)
+    power += 1
+  return decimal
+
 
 '''
 Question 2: 
@@ -26,12 +34,20 @@ Write a function(s) that prints out a tree shape (see below). The function shoul
 You can assume that the width of the tree will be odd and hence every line will have an odd number of asterisks. The trunk will always have a width of three asterisks.
 '''
 
-def printTree(width,trunk):
-  print("    *")
-  print("   ***")
-  print("  *****")
-  print("   ***")
-  print("   ***")
+def printTree(width, trunk):
+  # Print Tree
+  for row in range((width+1)//2):
 
-print(octalToDecimal(52));
-printTree(5,2)
+    asts = 2 * row + 1
+    spaces = (width - asts) // 2
+
+    print(' ' * spaces + '*' * asts)
+
+  # Print Trunk
+  left_spaces = (width - 3) // 2
+  for row in range(trunk):
+    print(' ' * left_spaces + '***')
+
+
+print(octalToDecimal(52))
+printTree(5, 4)
